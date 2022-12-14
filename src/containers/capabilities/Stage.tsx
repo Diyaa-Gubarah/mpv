@@ -17,7 +17,7 @@ const returnStage = (stage: "1" | "2" | "3") => {
 
 const Item = (item: ListType) => {
   return (
-    <Box gap="0.5em" key={item.id} flex={1} js="center" al="center">
+    <Box gap="0.5em" flex={1} js="center" al="center">
       <CustomIcon color="white" size={24} stage={item.stage} icon={item.icon} />
       <Box direction="column" gap="0.2em">
         <Text color="#a3a3a3" fontSize="0.75em">{`${item.id}. STAGE`}</Text>
@@ -43,7 +43,7 @@ const Stage = ({}: Props) => {
 
       <Box flex={1} js="space-evenly">
         {ListData.map((item) => (
-          <Item {...item} />
+          <Item {...item} key={item.id.toString()} />
         ))}
       </Box>
     </Box>
