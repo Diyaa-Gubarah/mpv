@@ -1,0 +1,25 @@
+/* Define a constant font and size for the app */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+:root {
+    --primary-color: #0074d9;
+    --secondary-color: #2ecc40;
+    --text-color: #333;
+    --heading-color: #000;
+    --border-color: #ccc;
+    --background-color: #001;
+    --link-color: #fff;
+    --link-hover-color: #f3f3f3;
+    --success-color: #2ecc40;
+    --warning-color: #ffdc00;
+    --error-color: #ff4136;
+}
+
+
+
+html {
+    font-family: 'Roboto', sans-serif;
+    font-size: clamp(1rem, 0.5rem + 1vw, 1.2rem);
+    scroll-behavior: smooth;
+    background:var(--background-color)
+}

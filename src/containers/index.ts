@@ -1,0 +1,6 @@
+export { default as Home } from './home/Home'
+export { default as Capabilities } from './capabilities/Capabilities'
+export { default as Services } from './services/Services'
+export { default as Gallery } from './gallery/Gallery'
+export { default as OurStory } from './our-story/OurStory'
+export { default as ContactUs } from './contact-us/ContactUs'
