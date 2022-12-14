@@ -1,27 +1,45 @@
+import { Box, Text } from "../index";
+
 import React from "react";
 import styled from "styled-components";
 
-const Input = styled.input`
-  padding: 10px;
-  font-size: 16px;
+interface InputProps {
+  name: string;
+  value: string;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  type: "text" | "email";
+  placeholder?: string;
+  width?: string;
+}
+
+const StyledInput = styled.input`
   border: 1px solid #ccc;
-  border-radius: 4px;
-  margin-bottom: 10px;
+  padding: 0.5em;
+  border-radius: 0.24em;
+  font-size: 1em;
+  font-weight: bold;
+  width: ${(props) => props.width || "100%"};
 `;
 
+const Input: React.FC<InputProps> = ({
+  name,
+  value,
+  placeholder,
+  onChange,
+}) => {
+  return (
+    <Box direction="column" gap="0.5em" height="auto">
+      <Text color="#fff" fontSize="0.70em" fontWeight="bold">
+        kjhkhkjhk
+      </Text>
+      <StyledInput
+        name={name}
+        value={value}
+        onChange={onChange}
+        placeholder={placeholder}
+      />
+    </Box>
+  );
+};
+
 export default Input;
-// const App: React.FC = () => {
-//   return (
-//     <div>
-//       <Button>Click me!</Button>
-//       <Image src="https://example.com/image.png" alt="An example image" />
-//       <Form>
-//         <Label htmlFor="name">Name:</Label>
-//         <Input type="text" id="name" />
-//         <Label htmlFor="message">Message:</Label>
-//         <TextArea id="message" />
-//         <Button type="submit">Send</Button>
-//       </Form>
-//     </div>
-//   );
-// };

@@ -1,4 +1,4 @@
-import { Box, Text } from "../../components";
+import { Box, Input, Text, TextArea } from "../../components";
 
 import { FaMapMarkerAlt } from "react-icons/fa";
 import images from "../../constants/images";
@@ -24,7 +24,8 @@ function ContactUs({}: Props) {
           direction="column"
         >
           <Box flex={0.7}>
-            <Box>
+            {/* left */}
+            <Box width="50%">
               <FaMapMarkerAlt
                 color="#fff"
                 size={34}
@@ -35,13 +36,59 @@ function ContactUs({}: Props) {
                 }}
               />
             </Box>
-            <Box color="rgb(0,0,0,0.8)" gap="0.5em" direction="column">
+
+            {/* right */}
+            <Box
+              color="rgb(0,0,0,0.8)"
+              gap="0.5em"
+              direction="column"
+              width="50%"
+              height="auto"
+            >
               <Text fontSize={"1.5em"} color="#fff" fontWeight="bolder">
                 Lets Talk
               </Text>
-              <Text fontSize={"0.75em"} color="#fff" fontWeight="bolder">
-                Lets Talk
+              <Text fontSize={"0.6em"} color="#fff" fontWeight="bold">
+                Lorem ipsum dolor sit amet consectetur{" "}
               </Text>
+
+              <Box gap="1em" height="auto">
+                <Input
+                  name="lkjlkj"
+                  onChange={() => {}}
+                  type="text"
+                  value="kjkjh"
+                  placeholder="jh kjgkg hj"
+                  width="50%"
+                />
+                <Input
+                  name="lkjlkj"
+                  onChange={() => {}}
+                  type="text"
+                  value="kjkjh"
+                  placeholder="jh kjgkg hj"
+                  width="50%"
+                />
+              </Box>
+              <Input
+                name="lkjlkj"
+                onChange={() => {}}
+                type="text"
+                value="kjkjh"
+                placeholder="jh kjgkg hj"
+              />
+              <Input
+                name="lkjlkj"
+                onChange={() => {}}
+                type="text"
+                value="kjkjh"
+                placeholder="jh kjgkg hj"
+              />
+              <TextArea
+                onChange={() => {}}
+                value=""
+                placeholder="j gjhgjh ghgjh"
+              />
             </Box>
           </Box>
           <Box flex={0.3} color="#fff4">
