@@ -23,7 +23,7 @@ const App = () => {
       <EmptySpan id="gallery" padding="1em" />
       <Gallery />
 
-      <EmptySpan id="our-services" padding="1em" />
+      <EmptySpan id="our-story" padding="1em" />
       <OurStory />
 
       <EmptySpan id="contact-us" padding="1em" />

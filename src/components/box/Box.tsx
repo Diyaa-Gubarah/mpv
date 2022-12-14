@@ -73,7 +73,6 @@ const BoxWrapper = styled.div<BoxProps>`
   height: 100%;
   padding: 0;
   font-size: 1rem;
-
   width: 100%;
 
   // Customizable styles based on the provided props

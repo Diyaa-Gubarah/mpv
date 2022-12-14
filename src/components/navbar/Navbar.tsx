@@ -8,9 +8,9 @@ import images from "../../constants/images";
 import styled from "styled-components";
 
 const Sticky = styled(Box)`
-  position: sticky;
+  /* position: sticky;
   top: 0;
-  z-index: 2;
+  z-index: 2; */
   /* background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.6)); */
 `;
 
