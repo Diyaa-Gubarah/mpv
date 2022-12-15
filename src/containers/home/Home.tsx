@@ -1,4 +1,4 @@
-import { Box, CustomLink, Navbar, Text, createButton } from "../../components";
+import { Box, CustomLink, Navbar, SideNav, Text, createButton } from "../../components";
 
 import images from "../../constants/images";
 import { withResponsive } from "../../hoc";

@@ -4,14 +4,17 @@ import React from "react";
 import styled from "styled-components";
 
 const SideNavContainer = styled.div`
-  width: 200px;
-  height: 100%;
+  width: 45%;
+  height: 100vh;
   position: fixed;
   top: 0;
-  left: 0;
-  background-color: #333;
+  right: 0;
+  background-color: #0006;
   overflow-x: hidden;
-  padding-top: 20px;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 `;
 
 const MenuIcon = styled.div`
@@ -36,14 +39,17 @@ const NavLink = styled(Link)`
   }
 `;
 
-const SideNav: React.FC = () => {
-  return (
+type Props = {};
+
+const SideNav: React.FC<Props> = (props) => {
+  const [visible, setVisible] = React.useState<boolean>(false);
+  return visible ? (
     <SideNavContainer>
       <MenuIcon as={FaBars} />
       <NavLink to="/">Home</NavLink>
       <NavLink to="/about">About</NavLink>
     </SideNavContainer>
-  );
+  ) : null;
 };
 
 export default SideNav;

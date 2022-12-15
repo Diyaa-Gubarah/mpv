@@ -58,12 +58,8 @@ const shadow = css`
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(
-      to top,
-      black 0%,
-      transparent 100%
-    ); /* This creates the gradient */
-    opacity: 0.55;
+    background: linear-gradient(to bottom,transparent,#0009);
+    opacity: 0.9;
   }
 `;
 

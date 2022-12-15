@@ -15,18 +15,18 @@ const returnBackground = (stage: "1" | "2" | "3"): string => {
   }
 };
 
-
 interface Props {
-  icon: "check" | "close" | "waiting";
+  icon: "check" | "close" | "waiting" | "menu";
   color: string;
   size: number;
-  stage: "1" | "2" | "3";
+  stage?: "1" | "2" | "3";
 }
 
 const Icon = {
   check: Icons.BsCheck2,
   close: Icons.IoClose,
   waiting: Icons.CgSandClock,
+  menu: Icons.HiMenuAlt3,
 };
 
 const CustomIcon: React.FunctionComponent<Props> = ({
@@ -39,7 +39,7 @@ const CustomIcon: React.FunctionComponent<Props> = ({
 
   return (
     <Box
-      color={returnBackground(stage)}
+      color={returnBackground(stage || "1")}
       al="center"
       js="center"
       flex={0.5}

@@ -1,4 +1,4 @@
-import { Box, EmptySpan, Footer, Navbar } from "./components";
+import { Box, EmptySpan, Footer, Navbar, SideNav } from "./components";
 import {
   Capabilities,
   ContactUs,
@@ -11,6 +11,8 @@ import {
 const App = () => {
   return (
     <>
+        <SideNav/>
+
       <EmptySpan id="home" />
       <Home />
 
