@@ -1,7 +1,11 @@
 import { Box, Text } from "../index";
+import styled, { css } from "styled-components";
 
 import React from "react";
-import styled from "styled-components";
+
+const asTextArea = css`
+  height: max-content;
+`;
 
 interface InputProps {
   name: string;
@@ -10,15 +14,17 @@ interface InputProps {
   type: "text" | "email";
   placeholder?: string;
   width?: string;
+  multiple?: boolean;
 }
 
 const StyledInput = styled.input`
   border: 1px solid #ccc;
-  padding: 0.5em;
+  padding: 0.5em 0.5em;
   border-radius: 0.24em;
-  font-size: 1em;
-  font-weight: bold;
+  font-size: 0.75em;
+  font-weight: 500;
   width: ${(props) => props.width || "100%"};
+  min-height: ${(props) => props.multiple && "40px"};
 `;
 
 const Input: React.FC<InputProps> = ({
@@ -26,6 +32,7 @@ const Input: React.FC<InputProps> = ({
   value,
   placeholder,
   onChange,
+  multiple,
 }) => {
   return (
     <Box direction="column" gap="0.5em" height="auto">
@@ -37,6 +44,7 @@ const Input: React.FC<InputProps> = ({
         value={value}
         onChange={onChange}
         placeholder={placeholder}
+        multiple={multiple}
       />
     </Box>
   );

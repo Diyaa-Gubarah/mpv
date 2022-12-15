@@ -14,18 +14,18 @@ type ButtonProps = {
 };
 
 const Button = styled.div<ButtonProps>`
-  background-color: ${(props) => props.background};
   color: ${(props) => props.color};
   border: ${(props) => props.border};
   height: ${(props) => props.height};
   border-radius: ${(props) => props.radius};
   width: ${(props) => props.width};
+  align-items: center;
+  justify-content: center;
+  display: flex;
 
   &:hover {
-    background-color: #3c9240;
-  }
-  &:active {
-    background-color: #2d7c30;
+    background-color: ${(props) => props.color};
+    color: ${(props) => props.background};
   }
 `;
 

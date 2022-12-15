@@ -1,5 +1,6 @@
+import styled, { css } from "styled-components";
+
 import React from "react";
-import styled from "styled-components";
 
 interface CustomTextProps {
   fontSize?: string;
@@ -11,7 +12,19 @@ interface CustomTextProps {
   ta?: "center" | "left" | "right" | "justify";
   padding?: string;
   margin?: string;
+  type?: "text" | "button";
+  onClick?: () => void;
+  background?: string;
 }
+
+const button = css`
+  border-radius: 0.25em;
+  &:hover {
+    background-color: ${(props: CustomTextProps) => props.color};
+    color: ${(props: CustomTextProps) => props.background};
+    cursor: pointer;
+  }
+`;
 
 const Text = styled.span`
   color: ${(props: CustomTextProps) => props.color || "black"};
@@ -22,6 +35,8 @@ const Text = styled.span`
   text-align: ${(props: CustomTextProps) => props.ta};
   padding: ${(props: CustomTextProps) => props.padding};
   margin: ${(props: CustomTextProps) => props.margin};
+
+  ${(props: CustomTextProps) => props.type === "button" && button}
 `;
 
 const CustomText: React.FC<CustomTextProps> = (props) => {
