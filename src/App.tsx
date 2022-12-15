@@ -11,7 +11,7 @@ import {
 const App = () => {
   return (
     <>
-        <SideNav/>
+      <SideNav />
 
       <EmptySpan id="home" />
       <Home />

@@ -14,7 +14,7 @@ const ResponsiveSection = styled(Box)`
     margin:1.5em 0;
 
     & .borderWrapper {
-      border: 0.55em solid #fff;
+      border: 0.55em solid #74747C;
       width: 70%;
       height: 24vh;
       align-items: center;
@@ -59,7 +59,7 @@ const Section: React.FunctionComponent<SectionProps> = ({
   >
     <Box
       className="borderWrapper"
-      border="0.55em solid #f3f3f3"
+      border="0.55em solid #74747C"
       width="45%"
       height="38vh"
     >

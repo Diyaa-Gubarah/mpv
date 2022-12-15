@@ -8,17 +8,31 @@ import {
 
 import React from "react";
 import images from "../../constants/images";
+import styled from "styled-components";
+import { withResponsive } from "../../hoc";
+
+const Responsive = styled(Box)`
+  @media only screen and (${`max-width:750px`}) {
+    flex-direction: column;
+    padding: 1em 0;
+
+    & div {
+      width: 90%;
+      padding: 1em 0;
+    }
+  }
+`;
 
 type Props = {};
 
 function OurStory({}: Props) {
   return (
-    <Box color="#fff" al="center" gap="2em" padding="2em 0">
+    <Responsive color="#fff" al="center" gap="2em" padding="4em">
       <Box direction="column" gap="1em">
-        <Text fontSize={"3em"} color="#000" lineHeight={60} fontWeight="bold">
+        <Text fontSize={"2em"} color="#000" fontWeight="bold">
           OUR STORY
         </Text>
-        <Text>
+        <Text fontSize="0.85em">
           Lorem, ipsum dolor sit amet consectetur adipisicing elit. Soluta
           distinctio a quaerat labore, hic adipisci illo cupiditate? Harum
           possimus, quod pariatur reprehenderit totam quas, non ratione
@@ -31,7 +45,7 @@ function OurStory({}: Props) {
         width="50%"
         height="50%"
       />
-    </Box>
+    </Responsive>
   );
 }
 
