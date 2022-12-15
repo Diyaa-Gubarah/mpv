@@ -1,11 +1,10 @@
-import { counterReducer, useReducer } from './reducers/index'
+import { counterReducer, serviceReducer, useReducer } from './reducers/index'
 
 import { configureStore } from '@reduxjs/toolkit'
 
 export const store = configureStore({
     reducer: {
-        counter: counterReducer,
-        user: useReducer
+        services: serviceReducer
     },
 })
 

@@ -1,13 +1,36 @@
 import { Box, CustomImage, Text } from "../../components";
+import {
+  Service,
+  fetchServices,
+  selectServices,
+  selectServicesError,
+  selectServicesLoading,
+} from "../../store/reducers/serviceSlice";
+import { useAppDispatch, useAppShallowSelector } from "../../hooks";
 
 import ImageList from "./ImageList";
+import React from "react";
 import Section from "./Section";
+import { getRequest } from "../../services";
 import images from "../../constants/images";
 import { withResponsive } from "../../hoc";
 
 type Props = {};
 
 function Services({}: Props) {
+  const services = useAppShallowSelector(selectServices);
+  const fetching = useAppShallowSelector(selectServicesLoading);
+  const error = useAppShallowSelector(selectServicesError);
+
+
+  const dispatch = useAppDispatch();
+
+  React.useEffect(() => {
+    dispatch(fetchServices());
+
+    return () => {};
+  }, []);
+
   return (
     <Box margin="2em 0" direction="column">
       <Box direction="column" gap="2em">
@@ -21,39 +44,23 @@ function Services({}: Props) {
           OUR SERVICES
         </Text>
       </Box>
-      <Section
-        header="card header jh jhgj hgjhg"
-        url={images.main_bg}
-        sub="hint header"
-        description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae id excepturi ullam deserunt perferendis vel ea delectus autem atque ipsum nostrum magnam dolorum, ipsa in accusantium placeat quos nam alias."
-      />
-      <Section
-        reverse
-        header="card header jh jhgj hgjhg"
-        url={images.main_bg}
-        sub="hint header"
-        description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae id excepturi ullam deserunt perferendis vel ea delectus autem atque ipsum nostrum magnam dolorum, ipsa in accusantium placeat quos nam alias."
-      />
-      <Section
-        header="card header jh jhgj hgjhg"
-        url={images.main_bg}
-        sub="hint header"
-        description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae id excepturi ullam deserunt perferendis vel ea delectus autem atque ipsum nostrum magnam dolorum, ipsa in accusantium placeat quos nam alias."
-      />
-      <Section
-        reverse
-        header="card header jh jhgj hgjhg"
-        url={images.main_bg}
-        sub="hint header"
-        description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae id excepturi ullam deserunt perferendis vel ea delectus autem atque ipsum nostrum magnam dolorum, ipsa in accusantium placeat quos nam alias."
-      />
-      <Section
-        header="card header jh jhgj hgjhg"
-        url={images.main_bg}
-        sub="hint header"
-        description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae id excepturi ullam deserunt perferendis vel ea delectus autem atque ipsum nostrum magnam dolorum, ipsa in accusantium placeat quos nam alias."
-      />
-      <ImageList/>
+
+      {fetching ? (
+        <Box>Loading.....</Box>
+      ) : (
+        services?.map((services: Service, i) => (
+          <Section
+            key={i.toString()}
+            header={services.title}
+            url={services.url}
+            // sub="hint header"
+            description={services?.body}
+            reverse={i % 2 === 0}
+          />
+        ))
+      )}
+
+      <ImageList />
     </Box>
   );
 }

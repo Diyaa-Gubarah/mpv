@@ -5,27 +5,24 @@ type RequestData = {
     [key: string]: any;
 };
 
-const sendRequest = async (url: string, data: RequestData) => {
+export const getRequest = async (url: string,) => {
     try {
         // Make the GET request
         const response = await axios.get(url);
-        console.log(response.data);
 
-        // Make the POST request
-        await axios.post(url, data);
+        return response.data
     } catch (error) {
-        console.error(error);
+        console.error(`getRequest :${error}`);
+
+        return error
     }
 };
 
 
 
 
-const getRequest = async (url: string, data: any) => {
+export const postRequest = async (url: string, data: RequestData) => {
     try {
-        // Make the GET request
-        const response = await axios.get(url);
-        console.log(response.data);
 
         // Make the POST request
         await axios.post(url, data);
