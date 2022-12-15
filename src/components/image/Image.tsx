@@ -14,7 +14,7 @@ interface ImageProps {
 const Image = styled.img`
   width: 100%;
   height: 100%;
-  object-fit: ${(props: ImageProps) => props.objectFit};
+  object-fit: ${(props: ImageProps) => props.objectFit || 'contain'};
   /* mix-blend-mode: multiply;
   aspect-ratio: 3/2; */
   ${(props: ImageProps) => props.rounded && `border-radius: 50%;`}
@@ -26,7 +26,9 @@ const CustomImage: React.FC<ImageProps> = ({
   width,
   height,
   rounded,
+  objectFit,
 }) => {
+  console.log(`Image: objectFit ${objectFit}`);
   return (
     <Box width={width} height={height}>
       <Image src={src} alt={alt} rounded={rounded} />
