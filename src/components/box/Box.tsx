@@ -36,6 +36,7 @@ interface BoxProps {
   bottom?: string;
   left?: string;
   right?: string;
+  className?: string;
 }
 
 const responsive = css`
@@ -58,7 +59,7 @@ const shadow = css`
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(to bottom,transparent,#0009);
+    background: linear-gradient(to bottom, transparent, #0009);
     opacity: 0.9;
   }
 `;

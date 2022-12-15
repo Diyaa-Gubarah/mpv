@@ -59,9 +59,6 @@ const Responsive = withResponsive((props: ResponsiveProp) => {
   );
 });
 
-
-
-
 type Props = {};
 
 const Stage = ({}: Props) => {

@@ -3,6 +3,7 @@ import { Box, CustomImage, Text } from "../../components";
 import ImageList from "./ImageList";
 import Section from "./Section";
 import images from "../../constants/images";
+import { withResponsive } from "../../hoc";
 
 type Props = {};
 
@@ -57,4 +58,4 @@ function Services({}: Props) {
   );
 }
 
-export default Services;
+export default withResponsive(Services);
