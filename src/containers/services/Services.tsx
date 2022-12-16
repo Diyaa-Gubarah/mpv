@@ -8,6 +8,7 @@ import {
 } from "../../store/reducers/serviceSlice";
 import { useAppDispatch, useAppShallowSelector } from "../../hooks";
 
+import { AnyAction } from "@reduxjs/toolkit";
 import ImageList from "./ImageList";
 import React from "react";
 import Section from "./Section";
@@ -21,7 +22,6 @@ function Services({}: Props) {
   const services = useAppShallowSelector(selectServices);
   const fetching = useAppShallowSelector(selectServicesLoading);
   const error = useAppShallowSelector(selectServicesError);
-
 
   const dispatch = useAppDispatch();
 

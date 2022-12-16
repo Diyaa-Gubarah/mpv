@@ -1,8 +1,11 @@
 import { counterReducer, serviceReducer, useReducer } from './reducers/index'
 
 import { configureStore } from '@reduxjs/toolkit'
+import thunkMiddleware from 'redux-thunk';
 
 export const store = configureStore({
+    middleware: [thunkMiddleware],
+
     reducer: {
         services: serviceReducer
     },
