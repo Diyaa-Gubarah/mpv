@@ -10,7 +10,7 @@ type JustifyType =
   | "space-around"
   | "space-evenly";
 
-type AlignType = "flex-start" | "flex-end " | "center" | "baseline" | "stretch";
+type AlignType = "flex-start" | "flex-end" | "center" | "baseline" | "stretch";
 
 interface BoxProps {
   // Customizable properties for the Box component

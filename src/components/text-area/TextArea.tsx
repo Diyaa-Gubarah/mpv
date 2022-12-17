@@ -21,7 +21,7 @@ interface TextareaProps {
   value: string;
   onChange: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
   placeholder?: string;
-  name?: string;
+  name: string;
 }
 
 const Textarea: React.FC<TextareaProps> = ({
@@ -36,6 +36,7 @@ const Textarea: React.FC<TextareaProps> = ({
         {name}
       </Text>
       <StyledTextarea
+        name={name}
         value={value}
         onChange={onChange}
         placeholder={placeholder}

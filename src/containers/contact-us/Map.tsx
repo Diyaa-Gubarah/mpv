@@ -1,7 +1,9 @@
 import { Box, CustomIcon, Input, Text, TextArea } from "../../components";
+import { ContactData, ListData } from "../../data";
 
+import ContactForm from "./Form";
+import { ContactType } from "../../data/contact-data";
 import { FaMapMarkerAlt } from "react-icons/fa";
-import { ListData } from "../../data";
 import React from "react";
 import images from "../../constants/images";
 import styled from "styled-components";
@@ -48,8 +50,6 @@ const ResponseMap = styled(Box)`
 type Props = {};
 
 const Map = (props: Props) => {
-  const [area, setArea] = React.useState("k");
-
   return (
     <ResponseMap
       url={images.map}
@@ -118,58 +118,7 @@ const Map = (props: Props) => {
             Lorem ipsum dolor sit amet consectetur{" "}
           </Text>
 
-          <Box gap="1em" height="auto">
-            <Input
-              name="lkjlkj"
-              onChange={() => {}}
-              type="text"
-              value="kjkjh"
-              placeholder="jh kjgkg hj"
-              width="50%"
-            />
-            <Input
-              name="lkjlkj"
-              onChange={() => {}}
-              type="text"
-              value="kjkjh"
-              placeholder="jh kjgkg hj"
-              width="50%"
-            />
-          </Box>
-          <Input
-            name="lkjlkj"
-            onChange={() => {}}
-            type="text"
-            value="kjkjh"
-            placeholder="jh kjgkg hj"
-          />
-          <Input
-            name="lkjlkj"
-            onChange={() => {}}
-            type="text"
-            value="kjkjh"
-            placeholder="jh kjgkg hj"
-          />
-
-          <TextArea
-            name="text area"
-            onChange={(e) => setArea(e.target.value)}
-            value={area}
-            placeholder="j gjhgjh ghgjh"
-          />
-          <Text
-            color="#fff"
-            type="button"
-            background="#000"
-            onClick={() => console.log("kjhkjhkh")}
-            margin="1em 0"
-            padding="0.25em 1.5em"
-            fontSize="0.75em"
-            width="max-content"
-            ta="center"
-          >
-            Click
-          </Text>
+          <ContactForm />
         </Box>
       </Box>
       <Box
@@ -197,7 +146,7 @@ const Map = (props: Props) => {
             gap="1em"
             className="mapBottom--cards"
           >
-            {ListData.slice(0, 3).map((item) => (
+            {ContactData.map((item) => (
               <Item {...item} key={item.id.toString()} />
             ))}
           </Box>
@@ -211,8 +160,8 @@ const Map = (props: Props) => {
           gap="1em"
           height="max-content"
         >
-          <CustomIcon color="white" size={18} stage={"1"} icon={"check"} />
-          <CustomIcon color="white" size={18} stage={"1"} icon={"check"} />
+          <CustomIcon color="white" size={16} stage={"1"} icon={"facebook"} />
+          <CustomIcon color="white" size={16} stage={"1"} icon={"instagram"} />
           <Text color="#fff" fontSize="0.75em" fontWeight="bold">
             jhgjh hjgjghj
           </Text>
@@ -224,16 +173,16 @@ const Map = (props: Props) => {
 
 export default Map;
 
-const Item = (item: any) => {
+const Item = ({ description, header, icon }: ContactType) => {
   return (
     <Box gap="0.5em" flex={1} js="center" al="center">
-      <CustomIcon color="white" size={18} stage={"1"} icon={"check"} />
+      <CustomIcon color="white" size={16} stage={"1"} icon={icon} />
       <Box direction="column" gap="0.2em">
         <Text color="#fff" fontSize="0.75em">
-          Email
+          {header}
         </Text>
         <Text color="#fff" fontWeight="bold" fontSize="0.75em">
-          kj kjhkjhkhjhkj
+          {description}{" "}
         </Text>
       </Box>
     </Box>

@@ -1,3 +1,3 @@
-export { default as counterReducer } from './counterSlice'
-export { default as useReducer } from './userSlice'
-export { default as serviceReducer } from './serviceSlice'
+export { default as servicesReducer } from './serviceSlice'
+export { default as todosReducer } from './todosSlice'
+export { default as formReducer } from './formSlice'

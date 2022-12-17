@@ -16,7 +16,16 @@ const returnBackground = (stage: "1" | "2" | "3"): string => {
 };
 
 interface Props {
-  icon: "check" | "close" | "waiting" | "menu";
+  icon:
+    | "check"
+    | "close"
+    | "waiting"
+    | "menu"
+    | "phone"
+    | "email"
+    | "location"
+    | "facebook"
+    | "instagram";
   color: string;
   size: number;
   stage?: "1" | "2" | "3";
@@ -27,6 +36,11 @@ const Icon = {
   close: Icons.IoClose,
   waiting: Icons.CgSandClock,
   menu: Icons.HiMenuAlt3,
+  phone: Icons.FiPhone,
+  email: Icons.MdOutlineEmail,
+  location: Icons.IoLocationOutline,
+  facebook: Icons.GrFacebookOption,
+  instagram: Icons.AiOutlineInstagram,
 };
 
 const CustomIcon: React.FunctionComponent<Props> = ({

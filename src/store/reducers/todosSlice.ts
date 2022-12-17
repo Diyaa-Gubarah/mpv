@@ -1,10 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-import { AxiosResponse } from 'axios';
 import { RootState } from './../store';
-import { getRequest } from "../../services";
 
-export type Service = {
+export type Todo = {
     id: number;
     title: string;
     body: string;
@@ -12,30 +10,30 @@ export type Service = {
 };
 
 
-// features/services/todoSlice.ts
+// features/todos/todoSlice.ts
 
-type ServicesState = {
+type TodosState = {
     // In `status` we will watch
-    // if services are being loaded.
+    // if todos are being loaded.
     loading: boolean;
 
     // `error` will contain an error message.
     error: string | null;
-    list: Service[];
+    list: Todo[];
 };
 
-const initialState: ServicesState = {
+const initialState: TodosState = {
     list: [],
     error: null,
     loading: false
 };
 
 
-// features/services/fetchServices.ts
+// features/todos/fetchTodos.ts
 // ...
 
 // This type describes the error object structure:
-type FetchServicesError = {
+type FetchTodosError = {
     message: string;
 };
 
@@ -48,26 +46,28 @@ type FetchServicesError = {
 //
 // `rejectValue` is useful when we need to type 
 // possible errors.
-export const fetchServices = createAsyncThunk<
-    Service[],
-    undefined,
-    { rejectValue: FetchServicesError }
+export const fetchTodos = createAsyncThunk<
+    Todo[],
+    number,
+    { rejectValue: FetchTodosError }
 >(
-    "services/fetch",
+    "todos/fetch",
     // The second argument, `thunkApi`, is an object
     // that contains all those fields
     // and the `rejectWithValue` function:
-    async (args: unknown, thunkApi) => {
-        const response: Service[] = await getRequest('https://jsonplaceholder.typicode.com/posts');
+    async (limit: number, thunkApi) => {
+        const response = await fetch('https://jsonplaceholder.typicode.com/posts');
+
 
         // Check if status is not okay:
-        if (!Array.isArray(response)) {
+        if (response.status !== 200) {
             // Return the error message:
             return thunkApi.rejectWithValue({
-                message: "Failed to fetch services."
+                message: "Failed to fetch todos."
             });
         } else {
-            return response;
+            const data: Todo[] = await response.json()
+            return data;
 
         }
 
@@ -75,17 +75,20 @@ export const fetchServices = createAsyncThunk<
 );
 // ...
 
-export const servicesSlice = createSlice({
-    name: "services",
+export const todosSlice = createSlice({
+    name: "todos",
     initialState,
     reducers: {
         // ...
     },
+
+    // In `extraReducers` we declare 
+    // all the actions:
     extraReducers: (builder) => {
 
         // When we send a request,
-        // `fetchServices.pending` is being fired:
-        builder.addCase(fetchServices.pending, (state) => {
+        // `fetchTodos.pending` is being fired:
+        builder.addCase(fetchTodos.pending, (state) => {
             // At that moment,
             // we change status to `loading` 
             // and clear all the previous errors:
@@ -94,17 +97,17 @@ export const servicesSlice = createSlice({
         });
 
         // When a server responses with the data,
-        // `fetchServices.fulfilled` is fired:
-        builder.addCase(fetchServices.fulfilled,
+        // `fetchTodos.fulfilled` is fired:
+        builder.addCase(fetchTodos.fulfilled,
             (state, { payload }) => {
-                // We add all the new services into the state
+                // We add all the new todos into the state
                 // and change `status` back to `idle`:
                 state.list.push(...payload);
                 state.loading = false
             });
 
         // When a server responses with an error:
-        builder.addCase(fetchServices.rejected,
+        builder.addCase(fetchTodos.rejected,
             (state, { payload }) => {
                 // We show the error message
                 // and change `status` back to `idle` again.
@@ -115,9 +118,9 @@ export const servicesSlice = createSlice({
 });
 
 
-export default servicesSlice.reducer;
-export const { actions } = servicesSlice;
+export default todosSlice.reducer;
+export const { actions } = todosSlice;
 
-export const selectServices = (state: RootState) => state.services.list
-export const selectServicesLoading = (state: RootState) => state.services.loading
-export const selectServicesError = (state: RootState) => state.services.error
+export const selectTodos = (state: RootState) => state.todos.list
+export const selectTodosLoading = (state: RootState) => state.todos.loading
+export const selectTodosError = (state: RootState) => state.todos.error

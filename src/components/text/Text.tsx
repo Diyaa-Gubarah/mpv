@@ -15,6 +15,7 @@ interface CustomTextProps {
   type?: "text" | "button";
   onClick?: () => void;
   background?: string;
+  size?: "sm" | "md" | "large" | "x-large";
 }
 
 const button = css`
@@ -28,7 +29,10 @@ const button = css`
 
 const Text = styled.span`
   color: ${(props: CustomTextProps) => props.color || "black"};
-  font-size: ${(props: CustomTextProps) => props.fontSize || "1rem"};
+  font-size: ${(props) => (props.size === "sm" ? "0.75em" : props.fontSize)};
+  font-size: ${(props) => (props.size === "md" ? "1em" : props.fontSize)};
+  font-size: ${(props) => (props.size === "large" ? "1.5em" : props.fontSize)};
+  font-size: ${(props) => (props.size === "x-large" ? "2em" : props.fontSize)};
   font-weight: ${(props: CustomTextProps) => props.fontWeight};
   line-height: ${(props: CustomTextProps) => props.lineHeight}px;
   width: ${(props: CustomTextProps) => props.width};

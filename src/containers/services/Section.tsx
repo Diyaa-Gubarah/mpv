@@ -11,10 +11,10 @@ const ResponsiveSection = styled(Box)`
     /* background: blue; */
     gap: 2em;
     flex-direction: column;
-    margin:1.5em 0;
+    margin: 1.5em 0;
 
     & .borderWrapper {
-      border: 0.55em solid #74747C;
+      border: 0.55em solid #74747c;
       width: 70%;
       height: 24vh;
       align-items: center;
@@ -68,11 +68,13 @@ const Section: React.FunctionComponent<SectionProps> = ({
         position="absolute"
         top="0.75em"
         left={reverse ? "-2em" : "2em"}
+        al={reverse ? "flex-end" : "flex-start"}
         direction="column"
         gap="0.25em"
       >
         <Text
           color="#fff"
+          width="80%"
           fontSize="0.75em"
           fontWeight="bold"
           ta={reverse ? "right" : "left"}

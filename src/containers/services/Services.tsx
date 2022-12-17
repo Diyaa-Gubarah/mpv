@@ -1,6 +1,5 @@
-import { Box, CustomImage, Text } from "../../components";
+import { Box, Text } from "../../components";
 import {
-  Service,
   fetchServices,
   selectServices,
   selectServicesError,
@@ -8,11 +7,11 @@ import {
 } from "../../store/reducers/serviceSlice";
 import { useAppDispatch, useAppShallowSelector } from "../../hooks";
 
-import { AnyAction } from "@reduxjs/toolkit";
+import Fade from "../../components/fade/Fade";
 import ImageList from "./ImageList";
 import React from "react";
 import Section from "./Section";
-import { getRequest } from "../../services";
+import { Todo } from "../../store/reducers/todosSlice";
 import images from "../../constants/images";
 import { withResponsive } from "../../hoc";
 
@@ -46,13 +45,19 @@ function Services({}: Props) {
       </Box>
 
       {fetching ? (
-        <Box>Loading.....</Box>
+        <Box direction="column" gap="1em" margin="2em auto">
+          {[1, 2, 3].map((item) => (
+            <Fade key={item}>
+              <Box height="32vh"></Box>
+            </Fade>
+          ))}
+        </Box>
       ) : (
-        services?.map((services: Service, i) => (
+        services?.map((services: Todo, i) => (
           <Section
             key={i.toString()}
             header={services.title}
-            url={services.url}
+            url={services.url || images.main_bg}
             // sub="hint header"
             description={services?.body}
             reverse={i % 2 === 0}
