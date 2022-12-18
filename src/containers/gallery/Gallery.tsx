@@ -8,7 +8,6 @@ import {
 import { useAppDispatch, useAppShallowSelector } from "../../hooks";
 
 import Fade from "../../components/fade/Fade";
-import images from "../../constants/images";
 import styled from "styled-components";
 import { useEffect } from "react";
 
@@ -27,15 +26,6 @@ const ShadowText = styled(Box)`
   z-index: 1;
   opacity: 0.5;
 `;
-
-const data = [
-  { url: "https://unsplash.com/photos/yC-Yzbqy7PY", id: 0 },
-  { url: "https://unsplash.com/photos/LNRyGwIJr5c", id: 1 },
-  { url: "https://unsplash.com/photos/N7XodRrbzS0", id: 2 },
-  { url: "https://unsplash.com/photos/Dl6jeyfihLk", id: 3 },
-  { url: "https://unsplash.com/photos/y83Je1OC6Wc", id: 4 },
-  { url: "https://unsplash.com/photos/LF8gK8-HGSg", id: 5 },
-];
 
 type Props = {};
 
