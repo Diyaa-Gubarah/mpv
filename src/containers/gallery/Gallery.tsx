@@ -1,7 +1,10 @@
 import { Box, List, Text } from "../../components";
+import { fetchImages, selectGallerys, selectGallerysError, selectGallerysLoading } from "../../store/reducers/gallerySlice";
+import { useAppDispatch, useAppShallowSelector } from "../../hooks";
 
 import images from "../../constants/images";
 import styled from "styled-components";
+import { useEffect } from "react";
 
 const ResponsiveGallery = styled.div`
   min-width: 70vw;
@@ -28,6 +31,15 @@ const data = [
 type Props = {};
 
 function Gallery({}: Props) {
+  const dispatch = useAppDispatch();
+  const images = useAppShallowSelector(selectGallerys);
+  const loading = useAppShallowSelector(selectGallerysLoading);
+  const error  = useAppShallowSelector(selectGallerysError);
+
+  useEffect(() => {
+    dispatch(fetchImages());
+  }, [dispatch]);
+
   return (
     <Box color="#444444" padding="3em 0">
       <Box direction="column">

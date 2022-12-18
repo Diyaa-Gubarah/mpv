@@ -1,5 +1,6 @@
 import { Box, Text } from "../../components";
 import {
+  Service,
   fetchServices,
   selectServices,
   selectServicesError,
@@ -11,7 +12,6 @@ import Fade from "../../components/fade/Fade";
 import ImageList from "./ImageList";
 import React from "react";
 import Section from "./Section";
-import { Todo } from "../../store/reducers/todosSlice";
 import images from "../../constants/images";
 import { withResponsive } from "../../hoc";
 
@@ -53,7 +53,7 @@ function Services({}: Props) {
           ))}
         </Box>
       ) : (
-        services?.slice(0, 5).map((services: Todo, i) => (
+        services?.slice(0, 5).map((services: Service, i) => (
           <Section
             key={i.toString()}
             header={services.title}

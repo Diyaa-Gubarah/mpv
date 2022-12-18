@@ -1,4 +1,4 @@
-import { formReducer, servicesReducer, todosReducer } from './reducers/index';
+import { formReducer, galleryReducer, servicesReducer, } from './reducers/index';
 
 import { configureStore } from '@reduxjs/toolkit';
 import thunkMiddleware from 'redux-thunk';
@@ -8,8 +8,8 @@ export const store = configureStore({
 
     reducer: {
         services: servicesReducer,
-        todos: todosReducer,
         form: formReducer,
+        gallery: galleryReducer,
     },
 })
 
