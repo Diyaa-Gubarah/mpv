@@ -1,7 +1,13 @@
 import { Box, List, Text } from "../../components";
-import { fetchImages, selectGallerys, selectGallerysError, selectGallerysLoading } from "../../store/reducers/gallerySlice";
+import {
+  fetchImages,
+  selectGallerys,
+  selectGallerysError,
+  selectGallerysLoading,
+} from "../../store/reducers/gallerySlice";
 import { useAppDispatch, useAppShallowSelector } from "../../hooks";
 
+import Fade from "../../components/fade/Fade";
 import images from "../../constants/images";
 import styled from "styled-components";
 import { useEffect } from "react";
@@ -23,9 +29,12 @@ const ShadowText = styled(Box)`
 `;
 
 const data = [
-  { id: 1, url: images.main_bg },
-  { id: 2, url: images.main_bg },
-  { id: 3, url: images.main_bg },
+  { url: "https://unsplash.com/photos/yC-Yzbqy7PY", id: 0 },
+  { url: "https://unsplash.com/photos/LNRyGwIJr5c", id: 1 },
+  { url: "https://unsplash.com/photos/N7XodRrbzS0", id: 2 },
+  { url: "https://unsplash.com/photos/Dl6jeyfihLk", id: 3 },
+  { url: "https://unsplash.com/photos/y83Je1OC6Wc", id: 4 },
+  { url: "https://unsplash.com/photos/LF8gK8-HGSg", id: 5 },
 ];
 
 type Props = {};
@@ -34,7 +43,7 @@ function Gallery({}: Props) {
   const dispatch = useAppDispatch();
   const images = useAppShallowSelector(selectGallerys);
   const loading = useAppShallowSelector(selectGallerysLoading);
-  const error  = useAppShallowSelector(selectGallerysError);
+  const error = useAppShallowSelector(selectGallerysError);
 
   useEffect(() => {
     dispatch(fetchImages());
@@ -60,12 +69,27 @@ function Gallery({}: Props) {
             GALLERY
           </Text>
         </ShadowText>
-        <List
-          Item={Item}
-          data={data}
-          direction="horizontal"
-          scrollable={true}
-        />
+        {loading ? (
+          <List
+            Item={() => (
+              <Box direction="column" gap="1em" margin="2em 1em">
+                <Fade>
+                  <Box height="45vh" width="65vw"></Box>
+                </Fade>
+              </Box>
+            )}
+            data={[1, 2, 3]}
+            direction="horizontal"
+            scrollable={true}
+          />
+        ) : (
+          <List
+            Item={Item}
+            data={images.map((d) => ({ id: d.id, url: d.download_url }))}
+            direction="horizontal"
+            scrollable={true}
+          />
+        )}
         <Box height="100%" width="12%" shadow position="absolute" left={"0"} />
         <Box height="100%" width="12%" shadow position="absolute" right="0" />
       </Box>
@@ -84,6 +108,7 @@ type ItemProps = {
 };
 
 const Item: React.FC<ItemProps> = ({ data }) => {
+  console.log(`item data :${JSON.stringify(data)}`);
   return (
     <ResponsiveGallery>
       <Box url={data.url} width="100%" />

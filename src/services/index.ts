@@ -6,16 +6,8 @@ type RequestData = {
 };
 
 export const getRequest = async (url: string,) => {
-    try {
-        // Make the GET request
-        const response = await axios.get(url);
-
-        return response.data
-    } catch (error) {
-        console.error(`getRequest :${error}`);
-
-        return error
-    }
+    const response = await axios.get(url);
+    return response.data
 };
 
 

@@ -34,7 +34,7 @@ export function fetchServices() {
 
             dispatch(actions.fetchServiceSuccess(response));
         } catch (error) {
-            dispatch(actions.fetchServiceFailure(error as string));
+            dispatch(actions.fetchServiceFailure('Fetching Services Failed'));
         }
     };
 }

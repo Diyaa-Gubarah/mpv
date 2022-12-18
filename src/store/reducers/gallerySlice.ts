@@ -3,8 +3,15 @@ import { AnyAction, Dispatch, PayloadAction, createSlice } from '@reduxjs/toolki
 import { RootState } from '../store';
 import { getRequest } from '../../services';
 
+export interface Image {
+    id: string;
+    author: string;
+    url: string;
+    download_url?: string;
+}
+
 interface GalleryState {
-    images: string[];
+    images: Image[];
     loading: boolean;
     error: string | null;
 }
@@ -22,10 +29,11 @@ export function fetchImages() {
     return async (dispatch: Dispatch) => {
         dispatch(fetchImagesStart());
         try {
-            const response = await getRequest('/api/images');
+            const response = await getRequest('https://picsum.photos/v2/list');
+
             dispatch(fetchImagesSuccess(response));
         } catch (error) {
-            dispatch(fetchImagesFailure(error as string));
+            dispatch(fetchImagesFailure('Fetching Services Failed'));
         }
     };
 }
@@ -35,15 +43,18 @@ const gallerySlice = createSlice({
     name: 'gallery',
     initialState,
     reducers: {
-        fetchImagesStart(state) {
-            state.loading = true;
-            state.error = null;
+        fetchImagesStart: (state, action: PayloadAction) => {
+            return {
+                ...state,
+                loading: true,
+                error: null
+            }
         },
-        fetchImagesSuccess(state, action: PayloadAction<string[]>) {
+        fetchImagesSuccess: (state, action: PayloadAction<Image[]>) => {
             state.loading = false;
             state.images = action.payload;
         },
-        fetchImagesFailure(state, action: PayloadAction<string>) {
+        fetchImagesFailure: (state, action: PayloadAction<string>) => {
             state.loading = false;
             state.error = action.payload;
         },
@@ -57,6 +68,6 @@ export default gallerySlice.reducer;
 
 
 
-export const selectGallerys = (state: RootState) => state.services.list
-export const selectGallerysLoading = (state: RootState) => state.services.loading
-export const selectGallerysError = (state: RootState) => state.services.error
+export const selectGallerys = (state: RootState) => state.gallery.images
+export const selectGallerysLoading = (state: RootState) => state.gallery.loading
+export const selectGallerysError = (state: RootState) => state.gallery.error
