@@ -52,7 +52,7 @@ const SideNav: React.ForwardRefRenderFunction<unknown, SidenavProps> = (
 
   return show ? (
     <SidenavContainer color="#0008" shadow padding="0.75em">
-      <Box position="absolute" >
+      <Box position="absolute">
         <AiOutlineCloseCircle
           size={22}
           color="#fff"

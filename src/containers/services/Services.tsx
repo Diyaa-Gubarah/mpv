@@ -53,7 +53,7 @@ function Services({}: Props) {
           ))}
         </Box>
       ) : (
-        services?.map((services: Todo, i) => (
+        services?.slice(0, 5).map((services: Todo, i) => (
           <Section
             key={i.toString()}
             header={services.title}

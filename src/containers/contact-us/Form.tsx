@@ -16,87 +16,98 @@ import { AnyAction } from "@reduxjs/toolkit";
 import { contactFormReducer } from "./contactFormReducer";
 
 const ContactForm: React.FC = () => {
-  const dispatch = useAppDispatch();
-  const first = useAppShallowSelector(selectFirst);
-  const last = useAppShallowSelector(selectLast);
-  const email = useAppShallowSelector(selectEmail);
-  const message = useAppShallowSelector(selectMessage);
-  const error = useAppShallowSelector(selectError);
-  const loading = useAppShallowSelector(selectLoading);
-
-  //   const [state, dispatch] = useReducer(contactFormReducer, {
-  //     first: "",
-  //     last: "",
-  //     email: "",
-  //     message: "",
-  //   });
-
-  console.log({
-    loading,
+  const [state, dispatch] = useReducer(contactFormReducer, {
+    first: "",
+    last: "",
+    email: "",
+    message: "",
+    loading: false,
+    error: null,
   });
 
-  const handleChange = useCallback(() => {
-    dispatch(
-      submitForm({
-        first,
-        last,
-        email,
-        message,
-      })
-    );
-  }, [first, last, email, message]);
+  const handleChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      dispatch({
+        type: "UPDATE_CONTACT_FORM",
+        payload: {
+          [event.target.name]: event.target.value,
+        },
+      });
+    },
+    [state.first, state.last, state.email, state.message]
+  );
+
+  const handleSubmit = useCallback(() => {
+    //use post api
+    dispatch({
+      type: "SUBMIT_FORM",
+      payload: true,
+    });
+
+    setTimeout(() => {
+      dispatch({
+        type: "SUBMIT_FORM",
+        payload: false,
+      });
+    }, 3000);
+  }, []);
 
   return (
     <>
       <Box gap="1em" height="auto">
         <Input
           name="first"
-          onChange={(event) =>
-            dispatch(actions.updateFirst(event.target.value))
-          }
+          onChange={handleChange}
           type="text"
-          value={first || ""}
+          value={state.first || ""}
           placeholder="Write Your First Name"
           width="50%"
         />
         <Input
           name="last"
-          onChange={(event) => dispatch(actions.updateLast(event.target.value))}
+          onChange={handleChange}
           type="text"
-          value={last || ""}
+          value={state.last || ""}
           placeholder="Write Your Last Name"
           width="50%"
         />
       </Box>
       <Input
         name="email"
-        onChange={(event) => dispatch(actions.updateEmail(event.target.value))}
+        onChange={handleChange}
         type="email"
-        value={email || ""}
+        value={state.email || ""}
         placeholder="Write Your Email"
       />
 
       <TextArea
         name="message"
-        onChange={(event) =>
-          dispatch(actions.updateMessage(event.target.value))
-        }
-        value={message || ""}
+        onChange={handleChange}
+        value={state.message || ""}
         placeholder="Write Your Message"
       />
       <Text
         color="#fff"
         type="button"
         background="#000"
-        onClick={() => handleChange()}
+        onClick={handleSubmit}
         margin="1em 0"
         padding="0.25em 1.5em"
         fontSize="0.75em"
         width="max-content"
         ta="center"
       >
-        Click
+        {state.loading ? "Loading ..." : "Click"}
       </Text>
+      <Box
+        js="center"
+        color={state.error ? "#ff0066" : "#00ff99"}
+        padding="0.5em 0"
+      >
+        <Text color={"#fff"} ta="center" fontSize="1em">
+          error
+        </Text>
+      </Box>
     </>
   );
 };
