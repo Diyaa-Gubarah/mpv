@@ -30,7 +30,7 @@ const SidenavContainer = styled(Box)`
   z-index: 4;
   transition: transform 0.3s ease-out;
 
-  @media (min-width: 461px) {
+  @media (min-width: 581px) {
     display: none;
   }
 `;

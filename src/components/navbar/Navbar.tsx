@@ -9,14 +9,14 @@ import images from "../../constants/images";
 import styled from "styled-components";
 
 const LinkContainer = styled(Box)`
-  @media only screen and (${`max-width:460px`}) {
+  @media only screen and (${`max-width:580px`}) {
     display: none;
   }
 `;
 
 const MenuContainer = styled.div`
   display: none;
-  @media only screen and (${`max-width:460px`}) {
+  @media only screen and (${`max-width:580px`}) {
     display: inline;
   }
 `;

@@ -38,7 +38,7 @@ const ResponseMap = styled(Box)`
       font-size: 12px;
       align-items: flex-start;
 
-      @media only screen and (${`max-width:500px`}) {
+      @media only screen and (${`max-width:640px`}) {
         & .mapBottom--cards {
           flex-direction: column;
         }

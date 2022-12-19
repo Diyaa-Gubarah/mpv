@@ -47,6 +47,7 @@ const ContactForm: React.FC = () => {
     });
 
     try {
+      // change the body props
       const response = await postRequest(
         "https://jsonplaceholder.typicode.com/posts",
         { userId: 1, title: state.first, body: state.message }
