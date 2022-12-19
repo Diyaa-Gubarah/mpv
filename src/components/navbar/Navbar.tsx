@@ -37,13 +37,13 @@ const Navbar = () => {
   }, [sidenavRef, setShow]);
 
   return (
-    <Box direction="row" js="space-between" al="center" height="auto" gap="1em">
+    <Box direction="row" js="space-between" al="center" height="auto" gap="1em" margin="0.25em 0">
       <SideNav ref={sidenavRef} toggleMenu={toggleMenu} />
 
       <CustomImage
         alt="logo"
         src={images.logo}
-        height="3em"
+        height="2em"
         width="fit-content"
         objectFit="contain"
       />
