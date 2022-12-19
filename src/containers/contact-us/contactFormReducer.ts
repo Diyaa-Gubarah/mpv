@@ -6,9 +6,10 @@ type Action = {
     payload: boolean;
 } | {
     type: 'SUBMIT_FORM_SUCCESS';
+    success: string | null
 } | {
     type: 'SUBMIT_FORM_FAILED';
-    error: string;
+    error: string | null;
 }
 
 export interface ContactFormState {
@@ -17,7 +18,8 @@ export interface ContactFormState {
     email?: string;
     message?: string;
     loading?: boolean;
-    error?: unknown;
+    error?: any;
+    success?: any;
 }
 
 export const contactFormReducer = (state: ContactFormState, action: Action): ContactFormState => {
@@ -30,7 +32,10 @@ export const contactFormReducer = (state: ContactFormState, action: Action): Con
         case 'SUBMIT_FORM':
             return {
                 ...state,
-                loading: action.payload
+                loading: action.payload,
+                error: null,
+                success: null
+
             };
         case 'SUBMIT_FORM_SUCCESS':
             return {
@@ -39,7 +44,8 @@ export const contactFormReducer = (state: ContactFormState, action: Action): Con
                 last: "",
                 message: "",
                 loading: false,
-                error: ""
+                error: null,
+                success: action.success
             };
         case 'SUBMIT_FORM_FAILED':
             return {
@@ -48,6 +54,7 @@ export const contactFormReducer = (state: ContactFormState, action: Action): Con
                 last: "",
                 message: "",
                 loading: false,
+                success: null,
                 error: action.error
             };
         default:

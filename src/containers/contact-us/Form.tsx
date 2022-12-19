@@ -14,6 +14,7 @@ import { useCallback, useReducer } from "react";
 
 import { AnyAction } from "@reduxjs/toolkit";
 import { contactFormReducer } from "./contactFormReducer";
+import { postRequest } from "../../services";
 
 const ContactForm: React.FC = () => {
   const [state, dispatch] = useReducer(contactFormReducer, {
@@ -22,7 +23,8 @@ const ContactForm: React.FC = () => {
     email: "",
     message: "",
     loading: false,
-    error: null,
+    error: "",
+    success: "",
   });
 
   const handleChange = useCallback(
@@ -37,19 +39,44 @@ const ContactForm: React.FC = () => {
     [state.first, state.last, state.email, state.message]
   );
 
-  const handleSubmit = useCallback(() => {
+  const handleSubmit = useCallback(async () => {
     //use post api
     dispatch({
       type: "SUBMIT_FORM",
       payload: true,
     });
 
-    setTimeout(() => {
+    try {
+      const response = await postRequest(
+        "https://jsonplaceholder.typicode.com/posts",
+        { userId: 1, title: state.first, body: state.message }
+      );
       dispatch({
-        type: "SUBMIT_FORM",
-        payload: false,
+        type: "SUBMIT_FORM_SUCCESS",
+        success: "Your Message Successfully Submitted",
       });
-    }, 3000);
+
+      setTimeout(() => {
+        dispatch({
+          type: "SUBMIT_FORM_SUCCESS",
+          success: null,
+        });
+      }, 2000);
+    } catch (error) {
+      dispatch({
+        type: "SUBMIT_FORM_FAILED",
+        error: "Failed T Send Your Message. ",
+      });
+
+      setTimeout(
+        () =>
+          dispatch({
+            type: "SUBMIT_FORM_FAILED",
+            error: null,
+          }),
+        2000
+      );
+    }
   }, []);
 
   return (
@@ -99,15 +126,17 @@ const ContactForm: React.FC = () => {
       >
         {state.loading ? "Loading ..." : "Click"}
       </Text>
-      <Box
-        js="center"
-        color={state.error ? "#ff0066" : "#00ff99"}
-        padding="0.5em 0"
-      >
-        <Text color={"#fff"} ta="center" fontSize="1em">
-          error
-        </Text>
-      </Box>
+      {(state.error || state.success) && (
+        <Box
+          js="center"
+          color={state.error ? "#ff0066" : "#00ff99"}
+          padding="0.5em 0"
+        >
+          <Text color={"#fff"} ta="center" fontSize="1em">
+            {state.error || state.success}
+          </Text>
+        </Box>
+      )}
     </>
   );
 };
