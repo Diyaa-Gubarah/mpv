@@ -93,12 +93,10 @@ type ItemProps = {
   data: {
     url: string;
     id: number;
-    count: number;
   };
 };
 
 const Item: React.FC<ItemProps> = ({ data }) => {
-  console.log(`item data :${JSON.stringify(data)}`);
   return (
     <ResponsiveGallery>
       <Box url={data.url} width="100%" />

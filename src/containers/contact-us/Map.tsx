@@ -90,6 +90,7 @@ const Map = (props: Props) => {
             gap="2em"
             al="center"
             className="address"
+            js="space-between"
           >
             <div style={{ display: "flex", flexDirection: "column" }}>
               <Text fontSize="0.65em">kg kj kjhkjhkh</Text>

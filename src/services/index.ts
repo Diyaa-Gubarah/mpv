@@ -14,11 +14,5 @@ export const getRequest = async (url: string,) => {
 
 
 export const postRequest = async (url: string, data: RequestData) => {
-    try {
-
-        // Make the POST request
-        await axios.post(url, data);
-    } catch (error) {
-        console.error(error);
-    }
+    await axios.post(url, data);
 };
