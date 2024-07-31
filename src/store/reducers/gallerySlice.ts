@@ -1,73 +1,33 @@
-import { AnyAction, Dispatch, PayloadAction, createSlice } from '@reduxjs/toolkit';
-
-import { RootState } from '../store';
-import { getRequest } from '../../services';
+import create from "zustand";
+import { getRequest } from "../../services";
 
 export interface Image {
-    id: string;
-    author: string;
-    url: string;
-    download_url?: string;
+  id: string;
+  author: string;
+  url: string;
+  download_url?: string;
 }
 
 interface GalleryState {
-    images: Image[];
-    loading: boolean;
-    error: string | null;
+  images: Image[];
+  loading: boolean;
+  error: string | null;
+  fetchImages: () => Promise<void>;
 }
 
-const initialState: GalleryState = {
-    images: [],
-    loading: false,
-    error: null,
-};
-
-
-
-
-export function fetchImages() {
-    return async (dispatch: Dispatch) => {
-        dispatch(fetchImagesStart());
-        try {
-            const response = await getRequest('https://picsum.photos/v2/list');
-
-            dispatch(fetchImagesSuccess(response));
-        } catch (error) {
-            dispatch(fetchImagesFailure('Fetching Services Failed'));
-        }
-    };
-}
-
-
-const gallerySlice = createSlice({
-    name: 'gallery',
-    initialState,
-    reducers: {
-        fetchImagesStart: (state, action: PayloadAction) => {
-            return {
-                ...state,
-                loading: true,
-                error: null
-            }
-        },
-        fetchImagesSuccess: (state, action: PayloadAction<Image[]>) => {
-            state.loading = false;
-            state.images = action.payload;
-        },
-        fetchImagesFailure: (state, action: PayloadAction<string>) => {
-            state.loading = false;
-            state.error = action.payload;
-        },
-    },
-});
-
-export const { fetchImagesStart, fetchImagesSuccess, fetchImagesFailure } = gallerySlice.actions;
-
-export default gallerySlice.reducer;
-
-
-
-
-export const selectGallerys = (state: RootState) => state.gallery.images
-export const selectGallerysLoading = (state: RootState) => state.gallery.loading
-export const selectGallerysError = (state: RootState) => state.gallery.error
+export const useGalleryStore = create<GalleryState>((set) => ({
+  images: [],
+  loading: false,
+  error: null,
+  fetchImages: async () => {
+    set({ loading: true, error: null });
+    try {
+      const response = await getRequest<Image[]>(
+        "https://picsum.photos/v2/list"
+      );
+      set({ images: response, loading: false });
+    } catch (error) {
+      set({ error: "Fetching Images Failed", loading: false });
+    }
+  },
+}));

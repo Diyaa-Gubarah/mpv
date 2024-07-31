@@ -1,19 +1,25 @@
-import axios from 'axios';
+import axios from "axios";
 
 // Define the data type for the request body
 type RequestData = {
-    [key: string]: any;
+  [key: string]: any;
 };
 
-export const getRequest = async (url: string,) => {
-    const response = await axios.get(url);
-    return response.data
-};
-
-
-
+export async function getRequest<T>(url: string): Promise<T> {
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    return data as T;
+  } catch (error) {
+    console.error("Fetch error:", error);
+    throw error;
+  }
+}
 
 export const postRequest = async (url: string, data: RequestData) => {
-    const res = await axios.post(url, data);
-    return res
+  const res = await axios.post(url, data);
+  return res;
 };

@@ -1,34 +1,21 @@
 import { Box, Text } from "../../components";
-import { useAppDispatch, useAppShallowSelector } from "../../hooks";
-import {
-  Service,
-  fetchServices,
-  selectServices,
-  selectServicesError,
-  selectServicesLoading,
-} from "../../store/reducers/serviceSlice";
+import { Service, useServicesStore } from "../../store/reducers/serviceSlice";
 
-import React from "react";
 import Fade from "../../components/fade/Fade";
 import images from "../../constants/images";
 import { withResponsive } from "../../hoc";
 import ImageList from "./ImageList";
 import Section from "./Section";
+import React from "react";
 
 type Props = {};
 
 function Services({}: Props) {
-  const services = useAppShallowSelector(selectServices);
-  const fetching = useAppShallowSelector(selectServicesLoading);
-  const error = useAppShallowSelector(selectServicesError);
-
-  const dispatch = useAppDispatch();
+  const { services, loading, error, fetchServices } = useServicesStore();
 
   React.useEffect(() => {
-    dispatch(fetchServices());
-
-    return () => {};
-  }, []);
+    fetchServices();
+  }, [fetchServices]);
 
   return (
     <Box margin="2em 0" direction="column">
@@ -44,7 +31,7 @@ function Services({}: Props) {
         </Text>
       </Box>
 
-      {fetching ? (
+      {loading ? (
         <Box direction="column" gap="1em" margin="2em auto">
           {[1, 2, 3].map((item) => (
             <Fade key={item}>

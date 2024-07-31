@@ -1,15 +1,9 @@
 import { Box, List, Text } from "../../components";
-import {
-  fetchImages,
-  selectGallerys,
-  selectGallerysError,
-  selectGallerysLoading,
-} from "../../store/reducers/gallerySlice";
-import { useAppDispatch, useAppShallowSelector } from "../../hooks";
+import { useGalleryStore } from "../../store/reducers/gallerySlice";
 
-import Fade from "../../components/fade/Fade";
-import styled from "styled-components";
 import { useEffect } from "react";
+import styled from "styled-components";
+import Fade from "../../components/fade/Fade";
 
 const ResponsiveGallery = styled.div`
   min-width: 70vw;
@@ -30,14 +24,14 @@ const ShadowText = styled(Box)`
 type Props = {};
 
 function Gallery({}: Props) {
-  const dispatch = useAppDispatch();
-  const images = useAppShallowSelector(selectGallerys);
-  const loading = useAppShallowSelector(selectGallerysLoading);
-  const error = useAppShallowSelector(selectGallerysError);
+  const { images, loading, error, fetchImages } = useGalleryStore();
 
   useEffect(() => {
-    dispatch(fetchImages());
-  }, [dispatch]);
+    // Replace this line
+    // dispatch(fetchImages());
+    // With this
+    fetchImages();
+  }, [fetchImages]);
 
   return (
     <Box color="#444444" padding="3em 0">
