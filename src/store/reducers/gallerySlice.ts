@@ -1,4 +1,5 @@
-import { AnyAction, Dispatch, PayloadAction, createSlice, ThunkAction, Action } from '@reduxjs/toolkit';
+import { AnyAction, Dispatch, PayloadAction, createSlice } from '@reduxjs/toolkit';
+
 import { RootState } from '../store';
 import { getRequest } from '../../services';
 
@@ -21,33 +22,33 @@ const initialState: GalleryState = {
     error: null,
 };
 
-// Define the ThunkAction type
-export type AppThunk<ReturnType = void> = ThunkAction<
-  ReturnType,
-  RootState,
-  unknown,
-  Action<string>
->;
 
-export function fetchImages(): AppThunk {
-    return async (dispatch) => {
+
+
+export function fetchImages() {
+    return async (dispatch: Dispatch) => {
         dispatch(fetchImagesStart());
         try {
             const response = await getRequest('https://picsum.photos/v2/list');
+
             dispatch(fetchImagesSuccess(response));
         } catch (error) {
-            dispatch(fetchImagesFailure('Fetching Images Failed'));
+            dispatch(fetchImagesFailure('Fetching Services Failed'));
         }
     };
 }
+
 
 const gallerySlice = createSlice({
     name: 'gallery',
     initialState,
     reducers: {
-        fetchImagesStart: (state) => {
-            state.loading = true;
-            state.error = null;
+        fetchImagesStart: (state, action: PayloadAction) => {
+            return {
+                ...state,
+                loading: true,
+                error: null
+            }
         },
         fetchImagesSuccess: (state, action: PayloadAction<Image[]>) => {
             state.loading = false;
@@ -64,6 +65,9 @@ export const { fetchImagesStart, fetchImagesSuccess, fetchImagesFailure } = gall
 
 export default gallerySlice.reducer;
 
-export const selectGallerys = (state: RootState) => state.gallery.images;
-export const selectGallerysLoading = (state: RootState) => state.gallery.loading;
-export const selectGallerysError = (state: RootState) => state.gallery.error;
+
+
+
+export const selectGallerys = (state: RootState) => state.gallery.images
+export const selectGallerysLoading = (state: RootState) => state.gallery.loading
+export const selectGallerysError = (state: RootState) => state.gallery.error
