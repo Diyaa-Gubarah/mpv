@@ -1,4 +1,9 @@
-import { FaCheck, FaClock, FaFacebook, FaInstagramSquare } from "react-icons/fa";
+import {
+  FaCheck,
+  FaClock,
+  FaFacebook,
+  FaInstagramSquare,
+} from "react-icons/fa";
 import * as React from "react";
 
 import Box from "../box/Box";
