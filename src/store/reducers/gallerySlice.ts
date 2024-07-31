@@ -1,4 +1,4 @@
-import { AnyAction, Dispatch, PayloadAction, createSlice, ThunkAction } from '@reduxjs/toolkit';
+import { AnyAction, Dispatch, PayloadAction, createSlice, ThunkAction, Action } from '@reduxjs/toolkit';
 import { RootState } from '../store';
 import { getRequest } from '../../services';
 
@@ -22,17 +22,24 @@ const initialState: GalleryState = {
 };
 
 // Define the ThunkAction type
-type AppThunk = ThunkAction<void, RootState, unknown, AnyAction>;
+export type AppThunk<ReturnType = void> = ThunkAction<
+  ReturnType,
+  RootState,
+  unknown,
+  Action<string>
+>;
 
-export const fetchImages = (): AppThunk => async (dispatch) => {
-    dispatch(fetchImagesStart());
-    try {
-        const response = await getRequest('https://picsum.photos/v2/list');
-        dispatch(fetchImagesSuccess(response));
-    } catch (error) {
-        dispatch(fetchImagesFailure('Fetching Services Failed'));
-    }
-};
+export function fetchImages(): AppThunk {
+    return async (dispatch) => {
+        dispatch(fetchImagesStart());
+        try {
+            const response = await getRequest('https://picsum.photos/v2/list');
+            dispatch(fetchImagesSuccess(response));
+        } catch (error) {
+            dispatch(fetchImagesFailure('Fetching Images Failed'));
+        }
+    };
+}
 
 const gallerySlice = createSlice({
     name: 'gallery',

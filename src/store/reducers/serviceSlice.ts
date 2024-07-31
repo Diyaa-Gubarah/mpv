@@ -1,6 +1,11 @@
-import { createSlice, PayloadAction, ThunkAction } from '@reduxjs/toolkit';
-import { RootState, AppDispatch } from '../store';
-import { getRequest } from '../../services';
+import {
+  Action,
+  createSlice,
+  PayloadAction,
+  ThunkAction,
+} from "@reduxjs/toolkit";
+import { RootState, AppDispatch } from "../store";
+import { getRequest } from "../../services";
 
 export type Service = {
   id: number;
@@ -21,20 +26,27 @@ const initialState: ServicesState = {
   loading: false,
 };
 
-type AppThunk = ThunkAction<void, RootState, unknown, any>;
+export type AppThunk<ReturnType = void> = ThunkAction<
+  ReturnType,
+  RootState,
+  unknown,
+  Action<string>
+>;
 
 export const fetchServices = (): AppThunk => async (dispatch: AppDispatch) => {
-  dispatch(actions.fetchServiceStart());
+  dispatch(fetchServiceStart());
   try {
-    const response = await getRequest('https://jsonplaceholder.typicode.com/posts');
-    dispatch(actions.fetchServiceSuccess(response));
+    const response = await getRequest(
+      "https://jsonplaceholder.typicode.com/posts"
+    );
+    dispatch(fetchServiceSuccess(response));
   } catch (error) {
-    dispatch(actions.fetchServiceFailure('Fetching Services Failed'));
+    dispatch(fetchServiceFailure("Fetching Services Failed"));
   }
 };
 
 const servicesSlice = createSlice({
-  name: 'services',
+  name: "services",
   initialState,
   reducers: {
     fetchServiceStart(state) {
@@ -53,8 +65,10 @@ const servicesSlice = createSlice({
 });
 
 export default servicesSlice.reducer;
-export const { actions } = servicesSlice;
+export const { fetchServiceStart, fetchServiceFailure, fetchServiceSuccess } =
+  servicesSlice.actions;
 
 export const selectServices = (state: RootState) => state.services.list;
-export const selectServicesLoading = (state: RootState) => state.services.loading;
+export const selectServicesLoading = (state: RootState) =>
+  state.services.loading;
 export const selectServicesError = (state: RootState) => state.services.error;

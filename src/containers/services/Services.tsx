@@ -1,4 +1,5 @@
 import { Box, Text } from "../../components";
+import { useAppDispatch, useAppShallowSelector } from "../../hooks";
 import {
   Service,
   fetchServices,
@@ -6,14 +7,13 @@ import {
   selectServicesError,
   selectServicesLoading,
 } from "../../store/reducers/serviceSlice";
-import { useAppDispatch, useAppShallowSelector } from "../../hooks";
 
-import Fade from "../../components/fade/Fade";
-import ImageList from "./ImageList";
 import React from "react";
-import Section from "./Section";
+import Fade from "../../components/fade/Fade";
 import images from "../../constants/images";
 import { withResponsive } from "../../hoc";
+import ImageList from "./ImageList";
+import Section from "./Section";
 
 type Props = {};
 
