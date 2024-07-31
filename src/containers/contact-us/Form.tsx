@@ -1,20 +1,8 @@
-import { Box, Input, Text, TextArea } from "../../components/index";
-import {
-  actions,
-  selectEmail,
-  selectError,
-  selectFirst,
-  selectLast,
-  selectLoading,
-  selectMessage,
-  submitForm,
-} from "../../store/reducers/formSlice";
-import { useAppDispatch, useAppShallowSelector } from "../../hooks";
 import { useCallback, useReducer } from "react";
+import { Box, Input, Text, TextArea } from "../../components/index";
 
-import { AnyAction } from "@reduxjs/toolkit";
-import { contactFormReducer } from "./contactFormReducer";
 import { postRequest } from "../../services";
+import { contactFormReducer } from "./contactFormReducer";
 
 const ContactForm: React.FC = () => {
   const [state, dispatch] = useReducer(contactFormReducer, {
