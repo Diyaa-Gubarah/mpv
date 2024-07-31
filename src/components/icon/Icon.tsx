@@ -1,7 +1,9 @@
-import * as Icons from "react-icons/all";
+import { FaCheck, FaClock, FaFacebook, FaInstagramSquare } from "react-icons/fa";
 import * as React from "react";
 
 import Box from "../box/Box";
+import { AiFillCloseCircle, AiFillMessage, AiFillPhone } from "react-icons/ai";
+import { HiLocationMarker, HiMenuAlt3 } from "react-icons/hi";
 
 const returnBackground = (stage: "1" | "2" | "3"): string => {
   switch (stage) {
@@ -32,15 +34,15 @@ interface Props {
 }
 
 const Icon = {
-  check: Icons.BsCheck2,
-  close: Icons.IoClose,
-  waiting: Icons.CgSandClock,
-  menu: Icons.HiMenuAlt3,
-  phone: Icons.FiPhone,
-  email: Icons.MdOutlineEmail,
-  location: Icons.IoLocationOutline,
-  facebook: Icons.GrFacebookOption,
-  instagram: Icons.AiOutlineInstagram,
+  check: FaCheck,
+  close: AiFillCloseCircle,
+  waiting: FaClock,
+  menu: HiMenuAlt3,
+  phone: AiFillPhone,
+  email: AiFillMessage,
+  location: HiLocationMarker,
+  facebook: FaFacebook,
+  instagram: FaInstagramSquare,
 };
 
 const CustomIcon: React.FunctionComponent<Props> = ({
